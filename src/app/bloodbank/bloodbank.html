@@ -1,0 +1,46 @@
+<!-- STAT CARDS -->
+<div class="cards-row">
+  <div class="stat-card">
+    <div class="stat-label">Total em Estoque</div>
+    <div class="stat-value">{{ totalStock.toLocaleString('pt-BR') }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Tipos Críticos</div>
+    <div class="stat-value critical">{{ criticalCount }}</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Disponível para Uso</div>
+    <div class="stat-value good">98%</div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="table-card">
+  <div class="table-card-header">
+    <span class="table-card-title">Tipos Sanguíneos</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Quantidade</th>
+        <th>Validade</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (stock of stocks; track stock.type) {
+        <tr>
+          <td><span class="blood-badge" [ngClass]="stock.cssClass">{{ stock.type }}</span></td>
+          <td>{{ stock.quantity }} bolsas</td>
+          <td>{{ stock.expiry }} dias</td>
+          <td>
+            <span class="badge" [ngClass]="stock.statusClass">
+              <span class="badge-dot"></span>{{ stock.status }}
+            </span>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

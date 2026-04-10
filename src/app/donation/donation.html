@@ -1,0 +1,75 @@
+<div class="scheduling-grid">
+
+  <!-- FORMULÁRIO -->
+  <div class="form-card">
+    <div class="form-card-title">Novo Agendamento</div>
+
+    @if (submitted) {
+      <div class="success-msg">
+        <!-- Ícone de check -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Agendamento confirmado com sucesso!
+      </div>
+    }
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nome Completo *</label>
+        <input id="name" type="text" placeholder="Digite seu nome" [(ngModel)]="form.name" name="name" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cpf">CPF *</label>
+          <input id="cpf" type="text" placeholder="000.000.000-00" [(ngModel)]="form.cpf" name="cpf" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefone *</label>
+          <input id="phone" type="tel" placeholder="(00) 00000-0000" [(ngModel)]="form.phone" name="phone" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Data *</label>
+          <input id="date" type="date" [(ngModel)]="form.date" name="date" [min]="today" required>
+        </div>
+        <div class="form-group">
+          <label for="time">Horário *</label>
+          <select id="time" [(ngModel)]="form.time" name="time" required>
+            <option value="">Selecione</option>
+            @for (slot of timeSlots; track slot) {
+              <option [value]="slot">{{ slot }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="seu@email.com" [(ngModel)]="form.email" name="email">
+      </div>
+
+      <button type="submit" class="btn-primary">Confirmar Agendamento</button>
+    </form>
+  </div>
+
+  <!-- LISTA DE AGENDAMENTOS -->
+  <div class="form-card">
+    <div class="form-card-title">Próximos Agendamentos</div>
+    <div class="schedule-list">
+      @for (item of appointments; track item.name) {
+        <div class="schedule-item">
+          <span class="schedule-time">{{ item.time }}</span>
+          <span class="schedule-name">{{ item.name }}</span>
+          <span class="badge" [ngClass]="item.statusClass">
+            <span class="badge-dot"></span>{{ item.status }}
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>
