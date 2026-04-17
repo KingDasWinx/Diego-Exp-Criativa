@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, FooterComponent],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
 export class Layout {
   private readonly titles: Record<string, string> = {
+    home: 'Início',
     bloodbank: 'Estoque de Sangue',
     campaign: 'Campanhas',
     donation: 'Agendamento de Doação',
